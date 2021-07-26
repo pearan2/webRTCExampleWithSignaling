@@ -193,7 +193,6 @@ class PeerManager {
 const App = () => {
   const [peers, setPeers] = useState<Peer[]>([]);
   const localStream = useRef<MediaStream | null>(null);
-  const socket = useRef(io("http://localhost:8080"));
   const peerManager = useRef<PeerManager | null>(null);
 
   useEffect(() => {
@@ -202,9 +201,9 @@ const App = () => {
       .getUserMedia({ video: true })
       .then((stream: MediaStream) => {
         localStream.current = stream;
-
+        const socket = io("http://localhost:8080");
         peerManager.current = new PeerManager(
-          socket.current,
+          socket,
           stream,
           setPeers,
           PeerManager.Config

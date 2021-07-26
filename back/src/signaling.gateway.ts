@@ -71,9 +71,11 @@ export class SignalingGateway
 
   @SubscribeMessage('ice')
   handleIce(@MessageBody() iceDto: IceDto) {
-    console.log('ice called');
     const clientSocket = this.server.sockets.sockets.get(iceDto.toClientId);
     if (clientSocket) {
+      console.log(
+        `from ${iceDto.fromClientId} to ${iceDto.toClientId} ice send`,
+      );
       clientSocket.emit('ice', iceDto);
     }
   }
