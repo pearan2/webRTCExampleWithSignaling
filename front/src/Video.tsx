@@ -1,19 +1,22 @@
-import { useCallback, useEffect, useRef } from "react";
+import React from "react";
 
 interface VideoProps {
   stream: MediaStream | null;
 }
 
 const Video = (props: VideoProps) => {
+  console.log("Video compoent called", props);
   const videoRef = (video: HTMLVideoElement | null) => {
-    if (!video) {
+    if (video) {
       video!.srcObject = props.stream;
     }
   };
 
-  return (
+  return props.stream === null || props.stream === undefined ? (
+    <div>Loading...</div>
+  ) : (
     <video
-      style={{ width: "320px" }}
+      style={{ width: "180px" }}
       autoPlay
       playsInline
       ref={videoRef}
@@ -21,4 +24,4 @@ const Video = (props: VideoProps) => {
   );
 };
 
-export default Video;
+export default React.memo(Video);

@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App from "./RtcVideo";
 import reportWebVitals from "./reportWebVitals";
-import Test from "./useEffectTest";
 
 ReactDOM.render(
   <React.StrictMode>
